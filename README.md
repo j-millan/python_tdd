@@ -1,0 +1,1 @@
+This is a simple django project made following TDD techniques from [this book](https://www.obeythetestinggoat.com/book/praise.harry.html).
