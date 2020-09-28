@@ -89,7 +89,7 @@ class NewVisitorTest(LiveServerTestCase):
 
 		# Monica visits the home page, there's no sign of Alex's list
 		self.browser.get(self.live_server_url)
-		page_text = self.browser.find_element_by_tag_name('body')
+		page_text = self.browser.find_element_by_tag_name('body').text
 		self.assertNotIn('Buy food for my dog', page_text)
 
 		# Monica starts a new list by entering a new item

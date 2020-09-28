@@ -22,13 +22,18 @@ class HomePageTests(TestCase):
 
 	def test_redirects_after_POST_request(self):
 		response = self.client.post(reverse('home'), data={'item_text': 'Play Minecraft'})
-		self.assertRedirects(response, reverse('home'))
+		self.assertRedirects(response, '/lists/the-only-list-in-the-world/')
 
-	def test_displays_all_list_items(self):
+class ListViewTests(TestCase):
+	def test_uses_list_template(self):
+		response = self.client.get('/lists/the-only-list-in-the-world/')
+		self.assertTemplateUsed(response, 'lists/list.html')
+
+	def test_displays_all_items(self):
 		item1 = Item.objects.create(text='Item 1')
 		item2 = Item.objects.create(text='Item 2')
 
-		response = self.client.get(reverse('home'))
+		response = self.client.get('/lists/the-only-list-in-the-world/')
 		self.assertContains(response, 'Item 1')
 		self.assertContains(response, 'Item 2')
 
