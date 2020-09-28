@@ -5,7 +5,7 @@
 	
 	<body>
 		<h1>Your To-do list</h1>
-		<form method="POST" action="{% url 'home' %}">
+		<form method="POST" action="{% url 'new_list' %}">
 			{% csrf_token %}
 			<input type="text" name="item_text" placeholder="Enter new to-do item" id="id_new_item">
 		</form>

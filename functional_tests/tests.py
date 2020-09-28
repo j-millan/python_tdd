@@ -8,7 +8,6 @@ import time
 MAX_WAIT = 10
 
 class NewVisitorTest(LiveServerTestCase):
-
 	def setUp(self):
 		self.binary = FirefoxBinary('C:/Program Files/Mozilla Firefox/firefox.exe')
 		self.browser = webdriver.Firefox(firefox_binary=self.binary)

@@ -9,21 +9,6 @@ class HomePageTests(TestCase):
 		response = self.client.get(reverse('home'))
 		self.assertTemplateUsed(response, 'lists/home.html')
 
-	def test_only_saves_items_on_POST_requests(self):
-		self.client.get(reverse('home'))
-		self.assertEqual(Item.objects.count(), 0)
-
-	def test_can_save_POST_request(self):
-		response = self.client.post(reverse('home'), data={'item_text': 'Play Minecraft'})
-
-		self.assertEqual(Item.objects.count(), 1)
-		new_item = Item.objects.first()
-		self.assertEqual(new_item.text, 'Play Minecraft')
-
-	def test_redirects_after_POST_request(self):
-		response = self.client.post(reverse('home'), data={'item_text': 'Play Minecraft'})
-		self.assertRedirects(response, '/lists/the-only-list-in-the-world/')
-
 class ListViewTests(TestCase):
 	def test_uses_list_template(self):
 		response = self.client.get('/lists/the-only-list-in-the-world/')
@@ -36,6 +21,17 @@ class ListViewTests(TestCase):
 		response = self.client.get('/lists/the-only-list-in-the-world/')
 		self.assertContains(response, 'Item 1')
 		self.assertContains(response, 'Item 2')
+
+class NewListTests(TestCase):
+	def can_save_POST_request(self):
+		response = self.client.post(reverse('new_list'), data={'item_text': 'My new item'})
+		self.assertEqual(Item.objects.count(), 1)
+		new_item = Item.objects.first()
+		self.assertEqual(new_item, 'My new item')
+
+	def test_redirects_after_POST_request(self):
+		response = self.client.post(reverse('new_list'), data={'item_text': 'My new item'})
+		self.assertRedirects(response, '/lists/the-only-list-in-the-world/')
 
 class ItemModelTests(TestCase):
 	def test_saving_and_retrieving_items(self):
