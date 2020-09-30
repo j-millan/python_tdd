@@ -58,9 +58,6 @@ class NewVisitorTest(LiveServerTestCase):
 		# The page updates again, and now shows both items on his list
 		self.wait_for_row_in_list_table('1: Buy food for my dog')
 		self.wait_for_row_in_list_table('2: Feed my dog')
-		
-		self.fail('Finish the test!')
-
 
 		# He wonders whether the site will remember his list. Then he sees
 		# that the site has generated a unique URL for him -- there is some

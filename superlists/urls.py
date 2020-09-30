@@ -20,5 +20,6 @@ from lists import views
 urlpatterns = [
 	path('', views.home, name='home') ,
 	path('lists/new/', views.new_list, name='new_list'),
-	path('lists/the-only-list-in-the-world/', views.list_view, name='list_view'),
+	path('lists/<int:pk>/', views.list_view, name='list_view'),
+    path('lists/<int:pk>/new/', views.new_item, name='new_item'),
 ]
